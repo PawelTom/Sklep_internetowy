@@ -1,7 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using Sklep_internetowy.DAL;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<FilmsContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("LocalDB"))) ;
+
 
 var app = builder.Build();
 
