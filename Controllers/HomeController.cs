@@ -22,6 +22,11 @@ namespace Sklep_internetowy.Controllers
         {
             return View();
         }
+       
+        public IActionResult FooterSites(string name)
+        {
+            return View(name);
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
