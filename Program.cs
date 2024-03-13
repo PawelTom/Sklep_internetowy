@@ -27,8 +27,8 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "Footer",
-    pattern: "Info/{name}}",
-    defaults: new {controller="Home", Action ="FooterSites"}
+    pattern: "Info/{name}",
+    defaults: new {controller="Home", action ="FooterSites"}
     );
 app.MapControllerRoute(
     name: "default",

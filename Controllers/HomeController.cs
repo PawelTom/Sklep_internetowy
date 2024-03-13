@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Sklep_internetowy.DAL;
 using Sklep_internetowy.Models;
 using System.Diagnostics;
 
@@ -6,16 +7,26 @@ namespace Sklep_internetowy.Controllers
 {
     public class HomeController : Controller
     {
+
+
+
+
+        FilmsContext db;
+
+
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, FilmsContext db)
         {
             _logger = logger;
+            this.db = db;
         }
 
         public IActionResult Index()
         {
-            return View();
+
+            var kategorie = db.Categories.ToList();
+            return View(kategorie);
         }
 
         public IActionResult Privacy()
