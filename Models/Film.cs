@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Sklep_internetowy.Models
 {
@@ -19,8 +19,15 @@ namespace Sklep_internetowy.Models
         public string Director { get; set; }
 
 
-        [StringLength(200)]
+        [StringLength(500)]
         public string Desc { get; set; }
+
+
+        public double? Price { get; set; }
+
+        public DateTime? AddDate { get; set; }
+
+        public string? Poster { get; set; }
 
         //klucz obcy
         //inne opcje: CategoryCategoryId

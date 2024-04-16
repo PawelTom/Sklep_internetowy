@@ -25,8 +25,8 @@ namespace Sklep_internetowy.Controllers
         public IActionResult Index()
         {
 
-            var kategorie = db.Categories.ToList();
-            return View(kategorie);
+            var filmy = db.Films.ToList();
+            return View(filmy);
         }
 
         public IActionResult Privacy()
