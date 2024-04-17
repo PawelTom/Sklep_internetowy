@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using Sklep_internetowy.DAL;
-
+using Sklep_internetowy.Models;
 
 namespace Sklep_internetowy.Controllers
 {
@@ -35,5 +36,28 @@ namespace Sklep_internetowy.Controllers
 
             return View(film);
         }
+
+        public IActionResult AddFilm()
+        {
+            var model = new AddFilmViewModel();
+            model.Categories= db.Categories.ToList();
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult AddFilm(AddFilmViewModel model)
+        {
+            model.Film.AddDate = DateTime.Now;  //breakpoint
+            model.Film.Poster = "cube.jpg";
+            db.Films.Add(model.Film);
+            db.SaveChanges();
+
+         
+
+
+            return RedirectToAction("Details", new {filmId=model.Film.FilmId});
+        }
+
+        
     }
 }
