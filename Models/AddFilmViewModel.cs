@@ -6,5 +6,7 @@
 
         public List<Category> Categories { get; set; }
 
+        public IFormFile Poster { get; set; }
+
     }
 }
