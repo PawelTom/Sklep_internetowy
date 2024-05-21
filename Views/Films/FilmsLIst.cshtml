@@ -18,6 +18,7 @@
                 <td><a href="@Url.Action("Details", "Films", new{
                     filmId=film.FilmId
                 })">🔎</a></td>
+                <td><a href="@Url.Action("AddToCart", "Cart", new { filmId = film.FilmId })">🛒</a></td>
             </tr>
         }
     </tbody>

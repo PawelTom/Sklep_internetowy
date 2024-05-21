@@ -1,11 +1,15 @@
-﻿
-@model IEnumerable<Category>
-<ul class="nav navbar-nav">
+﻿@model IEnumerable<Category>
 
-    <@foreach (var category in Model)
-    {
-                <li>
-                    <a href="@Url.Action("FilmsList", "Films", new {categoryName = category.Name})">@category.Name</a>
-                </li>
-    }
+<ul class="nav navbar-nav">
+	@foreach (var category in Model)
+	{
+		<li>
+			<a href="@Url.Action("FilmsList", "Films", new { categoryName = category.Name })"> @category.Name </a>
+		</li>
+	}
+</ul>
+
+<ul class="nav navbar-nav navbar-right">
+	<li><a href="@Url.Action("Index", "Cart")"><span class="glyphicon glyphicon-shopping-cart"></span> (@ViewBag.quantity) </a></li>
+	<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 </ul>

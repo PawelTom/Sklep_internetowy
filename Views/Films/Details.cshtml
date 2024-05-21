@@ -1,22 +1,30 @@
 ﻿@model Film
-@(await Component.InvokeAsync("CategoryFilms", new{ categoryName = Model.Category.Name}))
+
+@(await Component.InvokeAsync("CategoryFilms", new { categoryName = Model.Category.Name }))
+
 <h1 class="category-name">@Model.Category.Name</h1>
-<table class="details-table">
-    <tr>
-        <td>
-           <img class="posters" src="~/obrazki/@Model.Poster" />
-        </td>
-        <td>
-            <p><b>Tytuł:</b> @Model.Title</p>
-            <p><b>Reżycer:</b> @Model.Director</p>
-            <p><b>Opis:</b> @Model.Desc</p>
-            <p><b>Cena:</b> @Model.Price zł</p>
-            <p><b>Data dodania:</b> @Model.AddDate?.ToString("dd/MM/yyyy")</p>
-        </td>
-    </tr>
+
+<table id="details-table">
+	<tr>
+		<td>
+			<img class="posters" src="~/obrazki/@Model.Poster" />
+		</td>
+		<td>
+			<p> <b>Tytuł:</b> @Model.Title </p>
+			<p> <b>Reżyser:</b> @Model.Director </p>
+			<p> <b>Opis:</b> @Model.Desc </p>
+			<p> <b>Cena:</b> @Model.Price zł </p>
+			<p> <b>Data dodania:</b></> @Model.AddDate?.ToString("dd/MM/yyyy") </p>
+		</td>
+	</tr>
+	<tr>
+		<td>
+<button class="btn btn-outline-primary" onclick="window.location.href='@Url.Action("EditFilm", "Films", new { filmId = Model.FilmId })'"> Edytuj </button>
+		</td>
+		<td>
+
+		<a href="@Url.Action("AddToCart", "Cart", new { filmId = Model.FilmId })" style="font-size: 2.5rem;">🛒</a>
+		</td>
+
+	</tr>
 </table>
-
-<button class="btn-success" onclick="window.location.href='@Url.Action("EditFilm","Films", new{filmId= Model.FilmId})'">
-    Edytuj
-
-</button>
