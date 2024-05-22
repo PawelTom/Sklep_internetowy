@@ -17,25 +17,12 @@ namespace SklepUKW2024.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            ViewBag.quantity = GetCartQuantity();
+            ViewBag.quantity = CartManager.GetCartQuantity(HttpContext.Session);
             var categories = db.Categories.ToList();
 
             return await Task.FromResult((IViewComponentResult)View("_Menu", categories));
         }
 
-        private int GetCartQuantity()
-        {
-            var cart = SessionHelper.GetObjectFromJson<List<CartItem>>(HttpContext.Session, Consts.CartSessionKey);
-
-
-            if (cart == null)
-            {
-                cart = new List<CartItem>();
-            }
-
-            int count = cart.Sum(i => i.Quantity);
-
-            return count;
-        }
+      
     }
 }

@@ -36,13 +36,18 @@ namespace Sklep_internetowy.Controllers
 
         public IActionResult Remove(int filmId)
         {
-            var cart = SessionHelper.GetObjectFromJson<List<CartItem>>(HttpContext.Session, Consts.CartSessionKey);
+            var model = new ItemRemoveViewModel()
+            {
+                itemId = filmId,
+                itemQuantity = CartManager.RemoveFromCart(HttpContext.Session, filmId),
+                cartValue = CartManager.GetCartValue(HttpContext.Session)
 
-            int index = GetIndex(filmId);
-            cart.RemoveAt(index);
-            SessionHelper.SetObjectAsJson(HttpContext.Session, Consts.CartSessionKey, cart);
 
-            return RedirectToAction("Index");
+
+            };
+
+
+            return Json(model);
         }
 
         private int GetIndex(int filmId)

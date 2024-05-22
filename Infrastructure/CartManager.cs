@@ -79,9 +79,20 @@ namespace Sklep_internetowy.Infrastructure
 
         }
 
-        public static int GetCartQuantity(ISession session)
+        public static int GetCartQuantity(ISession session )
         {
-            return 0;
+
+            var cart = GetCartItems(session);
+            int count = cart.Sum(i => i.Quantity);
+
+            return count;
         }
-    }
+
+		internal static double? GetCartValue(ISession session)
+		{
+            var cart = GetCartItems(session);
+            var value = cart.Sum(i => i.Quantity * i.Value);
+            return value;
+		}
+	}
 }
