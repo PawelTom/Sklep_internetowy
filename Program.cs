@@ -1,12 +1,35 @@
 using Microsoft.EntityFrameworkCore;
 using Sklep_internetowy.DAL;
+using Sklep_internetowy.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<FilmsContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("LocalDB"))) ;
+
 builder.Services.AddSession();
+
+builder.Services.AddDbContext<UsersContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("LocalDB")));
+
+builder.Services.AddSession();
+
+builder.Services.AddIdentity<AppUser, AppRole>(options =>
+
+{
+    options.User.RequireUniqueEmail = true;
+   options.Password.RequiredLength =6;
+    options.Password.RequireDigit = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireUppercase = true;
+    options.Password.RequireNonAlphanumeric = true;
+    
+    
+    }).AddEntityFrameworkStores<UsersContext>();
+
+
+
+
 
 var app = builder.Build();
 
@@ -24,6 +47,9 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseAuthentication();
+
 app.UseSession();
 app.MapControllerRoute(
     name: "Footer",
